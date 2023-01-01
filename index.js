@@ -28,6 +28,10 @@ function authenticateToken(req, res, next) {
   });
 }
 
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+}
+
 app.get("/posts", authenticateToken, (req, res) => {
   res.json(posts.filter((post) => post.name === req.user.name));
 });
