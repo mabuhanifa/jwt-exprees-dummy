@@ -1,6 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const app = express();
+app.use(express.json());
 const port = 8000;
 
 const posts = [
@@ -14,7 +16,7 @@ app.get("/posts", (req, res) => {
   res.json(posts);
 });
 
-app.get("/login", (req, res) => {
+app.post("/login", (req, res) => {
   //Authentication
   const username = req.body.username;
   const user = { name: username };
